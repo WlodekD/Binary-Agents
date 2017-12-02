@@ -1,0 +1,45 @@
+
+function binaryAgent(str) {
+  
+  var binary = [128, 64, 32, 16, 8 , 4, 2, 1];
+  var k = -1;
+  var noSpace = str.replace(/\s+/g, '');
+  var sum = [], res2 = [], result = [], res = [], matrix = [];
+  
+  for(var m=0; m<noSpace.length; m++){
+      if(m % 8 === 0){
+        k++;
+        matrix[k] = []; 
+      }
+        matrix[k].push(noSpace[m]); 
+  }
+  
+  for(var i=0; i<matrix.length; i++){
+    res[i] = [];
+    for(var j=0; j<matrix[i].length; j++){
+      if(matrix[i][j] == 1){
+        res[i].push(binary[j]);
+      }
+    }
+  }
+  
+  function getSum(total, num){
+    return total + num;
+  }
+  
+  for(var x=0; x<res.length; x++){
+    for(var y=0; y<res[x].length; y++){
+     sum[x] = res[x].reduce(getSum);
+    }  
+  }
+  
+  for(var z=0; z<sum.length; z++){
+    res2[z] = String.fromCharCode(sum[z]);
+  }
+  
+  result = res2.join('');
+  
+  return result;
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
